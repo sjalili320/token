@@ -1,0 +1,500 @@
+<!--  cSpell:disable -->
+<!DOCTYPE html>
+<html data-cy="project-root-html" lang="fa" dir="rtl" data-bs-theme="light" data-beasties-container>
+    <head>
+        <meta charset="utf-8">
+        <title>EasyTrader</title>
+        <base href="/">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <meta name="theme-color" content="#1976d2">
+        <link rel="manifest" href="manifest.webmanifest">
+        <meta name="theme-color" content="#1976d2">
+        <style>
+            .loading, .content-loading {
+                --top-offset: 50%;
+                pointer-events: none;
+            }
+
+            .loading::before, .content-loading::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                top: 0;
+                opacity: 1;
+                z-index: 101;
+            }
+
+            .loading.loading-before-app::before, .content-loading.loading-before-app::before {
+                z-index: 0;
+                background-color: transparent;
+            }
+
+            .loading.loading-before-app::after, .content-loading.loading-before-app::after {
+                z-index: 0;
+            }
+
+            .loading::after, .content-loading::after {
+                content: '';
+                background: url(/assets/images/spinner.svg) no-repeat center;
+                width: 64px;
+                height: 64px;
+                position: absolute;
+                top: var(--top-offset);
+                left: 50%;
+                margin-top: -32px;
+                margin-left: -32px;
+                z-index: 10;
+                text-rendering: auto;
+                line-height: inherit;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                -webkit-animation: spin 0.7s infinite linear;
+                animation: spin 0.7s infinite linear;
+                pointer-events: none;
+                z-index: 101;
+            }
+
+            @keyframes spin {
+                0% {
+                    -webkit-transform: rotate(0deg);
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    -webkit-transform: rotate(359deg);
+                    transform: rotate(359deg);
+                }
+            }
+
+            .d-main_inner {
+                background-color: #e3e8f1;
+            }
+        </style>
+        <!-- Google Tag Manager -->
+        <script>
+            (function(w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({
+                    'gtm.start': new Date().getTime(),
+                    event: 'gtm.js'
+                });
+                var f = d.getElementsByTagName(s)[0]
+                  , j = d.createElement(s)
+                  , dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.async = true;
+                j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+            }
+            )(window, document, 'script', 'dataLayer', 'GTM-TZMQ5NQ');
+        </script>
+        <!-- End Google Tag Manager -->
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-W5W7BQBJJH"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'G-W5W7BQBJJH');
+        </script>
+        <style>
+            @charset "UTF-8";:root {
+                --bs-blue: #0d6efd;
+                --bs-indigo: #6610f2;
+                --bs-purple: #6f42c1;
+                --bs-pink: #d63384;
+                --bs-red: #dc3545;
+                --bs-orange: #fd7e14;
+                --bs-yellow: #ffc107;
+                --bs-green: #198754;
+                --bs-teal: #20c997;
+                --bs-cyan: #0dcaf0;
+                --bs-black: #000;
+                --bs-white: #fff;
+                --bs-gray: #6c757d;
+                --bs-gray-dark: #343a40;
+                --bs-gray-100: #f8f9fa;
+                --bs-gray-200: #e9ecef;
+                --bs-gray-300: #dee2e6;
+                --bs-gray-400: #ced4da;
+                --bs-gray-500: #adb5bd;
+                --bs-gray-600: #6c757d;
+                --bs-gray-700: #495057;
+                --bs-gray-800: #343a40;
+                --bs-gray-900: #212529;
+                --bs-primary: #5d9cec;
+                --bs-secondary: #6c757d;
+                --bs-success: #1bbf89;
+                --bs-info: #0dcaf0;
+                --bs-warning: #f7af3e;
+                --bs-danger: #db524b;
+                --bs-light: #f8f9fa;
+                --bs-dark: #212529;
+                --bs-global: #0096b7;
+                --bs-primary-rgb: 93, 156, 236;
+                --bs-secondary-rgb: 108, 117, 125;
+                --bs-success-rgb: 27, 191, 137;
+                --bs-info-rgb: 13, 202, 240;
+                --bs-warning-rgb: 247, 175, 62;
+                --bs-danger-rgb: 219, 82, 75;
+                --bs-light-rgb: 248, 249, 250;
+                --bs-dark-rgb: 33, 37, 41;
+                --bs-global-rgb: 0, 150, 183;
+                --bs-primary-text-emphasis: rgb(37.2, 62.4, 94.4);
+                --bs-secondary-text-emphasis: rgb(43.2, 46.8, 50);
+                --bs-success-text-emphasis: rgb(10.8, 76.4, 54.8);
+                --bs-info-text-emphasis: rgb(5.2, 80.8, 96);
+                --bs-warning-text-emphasis: rgb(98.8, 70, 24.8);
+                --bs-danger-text-emphasis: rgb(87.6, 32.8, 30);
+                --bs-light-text-emphasis: #495057;
+                --bs-dark-text-emphasis: #495057;
+                --bs-primary-bg-subtle: rgb(222.6, 235.2, 251.2);
+                --bs-secondary-bg-subtle: rgb(225.6, 227.4, 229);
+                --bs-success-bg-subtle: rgb(209.4, 242.2, 231.4);
+                --bs-info-bg-subtle: rgb(206.6, 244.4, 252);
+                --bs-warning-bg-subtle: rgb(253.4, 239, 216.4);
+                --bs-danger-bg-subtle: rgb(247.8, 220.4, 219);
+                --bs-light-bg-subtle: rgb(251.5, 252, 252.5);
+                --bs-dark-bg-subtle: #ced4da;
+                --bs-primary-border-subtle: rgb(190.2, 215.4, 247.4);
+                --bs-secondary-border-subtle: rgb(196.2, 199.8, 203);
+                --bs-success-border-subtle: rgb(163.8, 229.4, 207.8);
+                --bs-info-border-subtle: rgb(158.2, 233.8, 249);
+                --bs-warning-border-subtle: rgb(251.8, 223, 177.8);
+                --bs-danger-border-subtle: rgb(240.6, 185.8, 183);
+                --bs-light-border-subtle: #e9ecef;
+                --bs-dark-border-subtle: #adb5bd;
+                --bs-white-rgb: 255, 255, 255;
+                --bs-black-rgb: 0, 0, 0;
+                --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+                --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+                --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, .15), rgba(255, 255, 255, 0));
+                --bs-body-font-family: var(--bs-font-sans-serif);
+                --bs-body-font-size: 1rem;
+                --bs-body-font-weight: 400;
+                --bs-body-line-height: 1.5;
+                --bs-body-color: #212529;
+                --bs-body-color-rgb: 33, 37, 41;
+                --bs-body-bg: #fff;
+                --bs-body-bg-rgb: 255, 255, 255;
+                --bs-emphasis-color: #000;
+                --bs-emphasis-color-rgb: 0, 0, 0;
+                --bs-secondary-color: rgba(33, 37, 41, .75);
+                --bs-secondary-color-rgb: 33, 37, 41;
+                --bs-secondary-bg: #e9ecef;
+                --bs-secondary-bg-rgb: 233, 236, 239;
+                --bs-tertiary-color: rgba(33, 37, 41, .5);
+                --bs-tertiary-color-rgb: 33, 37, 41;
+                --bs-tertiary-bg: #f8f9fa;
+                --bs-tertiary-bg-rgb: 248, 249, 250;
+                --bs-heading-color: inherit;
+                --bs-link-color: #5d9cec;
+                --bs-link-color-rgb: 93, 156, 236;
+                --bs-link-decoration: underline;
+                --bs-link-hover-color: rgb(74.4, 124.8, 188.8);
+                --bs-link-hover-color-rgb: 74, 125, 189;
+                --bs-code-color: #d63384;
+                --bs-highlight-color: #212529;
+                --bs-highlight-bg: rgb(255, 242.6, 205.4);
+                --bs-border-width: 1px;
+                --bs-border-style: solid;
+                --bs-border-color: #dee2e6;
+                --bs-border-color-translucent: rgba(0, 0, 0, .175);
+                --bs-border-radius: .375rem;
+                --bs-border-radius-sm: .25rem;
+                --bs-border-radius-lg: .5rem;
+                --bs-border-radius-xl: 1rem;
+                --bs-border-radius-xxl: 2rem;
+                --bs-border-radius-2xl: var(--bs-border-radius-xxl);
+                --bs-border-radius-pill: 50rem;
+                --bs-box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+                --bs-box-shadow-sm: 0 .125rem .25rem rgba(0, 0, 0, .075);
+                --bs-box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, .175);
+                --bs-box-shadow-inset: inset 0 1px 2px rgba(0, 0, 0, .075);
+                --bs-focus-ring-width: .25rem;
+                --bs-focus-ring-opacity: .25;
+                --bs-focus-ring-color: rgba(93, 156, 236, .25);
+                --bs-form-valid-color: #1bbf89;
+                --bs-form-valid-border-color: #1bbf89;
+                --bs-form-invalid-color: #db524b;
+                --bs-form-invalid-border-color: #db524b
+            }
+
+            *,*:before,*:after {
+                box-sizing: border-box
+            }
+
+            @media (prefers-reduced-motion: no-preference) {
+                :root {
+                    scroll-behavior: smooth
+                }
+            }
+
+            body {
+                margin: 0;
+                font-family: var(--bs-body-font-family);
+                font-size: var(--bs-body-font-size);
+                font-weight: var(--bs-body-font-weight);
+                line-height: var(--bs-body-line-height);
+                color: var(--bs-body-color);
+                text-align: var(--bs-body-text-align);
+                background-color: var(--bs-body-bg);
+                -webkit-text-size-adjust: 100%;
+                -webkit-tap-highlight-color: rgba(0,0,0,0)
+            }
+
+            iframe {
+                border: 0
+            }
+
+            :root {
+                --bs-breakpoint-xs: 0;
+                --bs-breakpoint-sm: 576px;
+                --bs-breakpoint-md: 768px;
+                --bs-breakpoint-lg: 992px;
+                --bs-breakpoint-xl: 1200px;
+                --bs-breakpoint-xxl: 1400px
+            }
+
+            :root {
+                --rounded: var(--bs-border-radius-lg);
+                --bs-bg-opacity: 1;
+                --bs-text-opacity: 1;
+                --bs-border-opacity: 1
+            }
+
+            *,*:focus {
+                outline: none!important
+            }
+
+            body,html {
+                height: 100vh;
+                height: 100dvh;
+                padding: 0;
+                margin: 0;
+                text-align: right;
+                overflow: hidden;
+                color: var(--bs-body-color)
+            }
+
+            body {
+                font-family: var(--bs-body-font-family);
+                font-weight: 400;
+                font-size: 13px
+            }
+
+            body {
+                background-color: var(--color-base)
+            }
+
+            .loading:before {
+                background-color: rgba(var(--color-principal-rgb),.7)
+            }
+
+            app-root {
+                display: block;
+                overflow: hidden;
+                height: 100%
+            }
+
+            :root {
+                --bs-font-sans-serif: IRANSansX !important;
+                --bs-body-font-size: 13px;
+                --bs-body-color: #212529;
+                --bs-body-color-rgb: 33, 37, 41;
+                --tab-active-bg: #4f6883;
+                --icon-color: #758696;
+                --bs-success-50: #e7fded;
+                --bs-success-100: #d0fbdc;
+                --bs-success-200: #a3f8c3;
+                --bs-success-300: #72ebab;
+                --bs-success-400: #4dd89c;
+                --bs-success-500: #1bbf89;
+                --bs-success-600: #13a482;
+                --bs-success-700: #0d8979;
+                --bs-success-800: #086e6b;
+                --bs-success-900: #05565b;
+                --bs-danger-50: #fef3ed;
+                --bs-danger-100: #fde8db;
+                --bs-danger-200: #fbcdb9;
+                --bs-danger-300: #f4a893;
+                --bs-danger-400: #e98576;
+                --bs-danger-500: #db524b;
+                --bs-danger-600: #bc363b;
+                --bs-danger-700: #9d2534;
+                --bs-danger-800: #7f172c;
+                --bs-danger-900: #690e28;
+                --bs-primary-50: #eff8fe;
+                --bs-primary-100: #dff2fe;
+                --bs-primary-200: #bfe2fd;
+                --bs-primary-300: #9ecef9;
+                --bs-primary-400: #84baf3;
+                --bs-primary-500: #5d9cec;
+                --bs-primary-600: #4379ca;
+                --bs-primary-700: #2e5aa9;
+                --bs-primary-800: #1d3e88;
+                --bs-primary-900: #112a71;
+                --bs-warning-50: #fefaeb;
+                --bs-warning-100: #fef5d8;
+                --bs-warning-200: #fee9b2;
+                --bs-warning-300: #fcd98b;
+                --bs-warning-400: #fac96d;
+                --bs-warning-500: #f7af3e;
+                --bs-warning-600: #d48c2d;
+                --bs-warning-700: #b16d1f;
+                --bs-warning-800: #8f5013;
+                --bs-warning-900: #763c0b;
+                --bs-violet-50: #f7f2fe;
+                --bs-violet-100: #e8d7fd;
+                --bs-violet-200: #dfcefb;
+                --bs-violet-300: #c9b3f4;
+                --bs-violet-400: #b49bea;
+                --bs-violet-500: #967adc;
+                --bs-violet-600: #7259bd;
+                --bs-violet-700: #533d9e;
+                --bs-violet-800: #38267f;
+                --bs-violet-900: #251769;
+                --bs-global-50: #e2fcff;
+                --bs-global-100: #c5f8ff;
+                --bs-global-200: #94e0ed;
+                --bs-global-300: #63c7db;
+                --bs-global-400: #31afc9;
+                --bs-global-500: #0096b7;
+                --bs-global-600: #007191;
+                --bs-global-700: #004c6a;
+                --bs-global-800: #00364b;
+                --bs-global-900: #001f2b
+            }
+
+            @font-face {
+                font-family: IRANSansX;
+                font-style: normal;
+                font-weight: 100;
+                src: url("./media/IRANSansX-Thin-4OKINGBN.woff") format("woff"),url("./media/IRANSansX-Thin-2RQ7XD6Z.woff2") format("woff2")
+            }
+
+            @font-face {
+                font-family: IRANSansX;
+                font-style: normal;
+                font-weight: 200;
+                src: url("./media/IRANSansX-UltraLight-MU5DEIAC.woff") format("woff"),url("./media/IRANSansX-UltraLight-TMOTB3FL.woff2") format("woff2")
+            }
+
+            @font-face {
+                font-family: IRANSansX;
+                font-style: normal;
+                font-weight: 300;
+                src: url("./media/IRANSansX-Light-GX3SL5V5.woff") format("woff"),url("./media/IRANSansX-Light-XPW7KY7H.woff2") format("woff2")
+            }
+
+            @font-face {
+                font-family: IRANSansX;
+                font-style: normal;
+                font-weight: 500;
+                src: url("./media/IRANSansX-Medium-56NFDPUY.woff") format("woff"),url("./media/IRANSansX-Medium-2CJ2VSKF.woff2") format("woff2")
+            }
+
+            @font-face {
+                font-family: IRANSansX;
+                font-style: normal;
+                font-weight: 600;
+                src: url("./media/IRANSansX-DemiBold-JMJP2RP4.woff") format("woff"),url("./media/IRANSansX-DemiBold-WHLGA5GL.woff2") format("woff2")
+            }
+
+            @font-face {
+                font-family: IRANSansX;
+                font-style: normal;
+                font-weight: 800;
+                src: url("./media/IRANSansX-ExtraBold-KPH77OGI.woff") format("woff"),url("./media/IRANSansX-ExtraBold-UHCE7C7N.woff2") format("woff2")
+            }
+
+            @font-face {
+                font-family: IRANSansX;
+                font-style: normal;
+                font-weight: 900;
+                src: url("./media/IRANSansX-Black-C23AZ4L5.woff") format("woff"),url("./media/IRANSansX-Black-5FMM7G2D.woff2") format("woff2")
+            }
+
+            @font-face {
+                font-family: IRANSansX;
+                font-style: normal;
+                font-weight: 950;
+                src: url("./media/IRANSansX-ExtraBlack-LGHW26F6.woff") format("woff"),url("./media/IRANSansX-ExtraBlack-ZHBSGWAN.woff2") format("woff2")
+            }
+
+            @font-face {
+                font-family: IRANSansX;
+                font-style: normal;
+                font-weight: 1000;
+                src: url("./media/IRANSansX-Heavy-OH6SESHU.woff") format("woff"),url("./media/IRANSansX-Heavy-TYWQTXK6.woff2") format("woff2")
+            }
+
+            @font-face {
+                font-family: IRANSansX;
+                font-style: normal;
+                font-weight: 700;
+                src: url("./media/IRANSansX-Bold-FYHVZR5N.woff") format("woff"),url("./media/IRANSansX-Bold-QHE5SK7T.woff2") format("woff2")
+            }
+
+            @font-face {
+                font-family: IRANSansX;
+                font-style: normal;
+                font-weight: 400;
+                src: url("./media/IRANSansX-Regular-XB5YOWBH.woff") format("woff"),url("./media/IRANSansX-Regular-HDRPPPNG.woff2") format("woff2")
+            }
+        </style>
+        <link rel="stylesheet" href="styles-3JWEDGUJ.css" media="print" onload="this.media='all'">
+        <noscript>
+            <link rel="stylesheet" href="styles-3JWEDGUJ.css">
+        </noscript>
+    </head>
+    <body>
+        <!-- Google Tag Manager (noscript) -->
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TZMQ5NQ" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <!-- End Google Tag Manager (noscript) -->
+        <!-- <link href="assets/css/colorize-dark.min.css" id="theme" rel="stylesheet" /> -->
+        <div class="loading loading-before-app"></div>
+        <app-root></app-root>
+        <noscript>Please enable JavaScript to continue using this application.</noscript>
+        <!-- Test Deploy -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <!-- <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-151461760-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-151461760-2');
+  </script> -->
+        <!-- trading view moved to scriptLoaderService -->
+        <!-- <script async src="/assets/tv/jquery-3.4.1.slim.min.js"></script>
+  <script async src="/assets/datafeeds/udf/dist/polyfills.js"></script>
+  -->
+        <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+  </script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+        <!-- <link href="/assets/tv/fontsFamilyRoboto.css" rel="stylesheet">
+    <link href="/assets/tv/fontsIconMaterialIcons.css" rel="stylesheet"> -->
+        <!-- moved to scriptLoaderService -->
+        <!-- <script async src="/assets/js/my-crisp.js"></script> -->
+        <link rel="modulepreload" href="chunk-67NDRJKX.js">
+        <link rel="modulepreload" href="chunk-JIF6FC2D.js">
+        <link rel="modulepreload" href="chunk-NGCDLITE.js">
+        <link rel="modulepreload" href="chunk-Y3TWWRWU.js">
+        <link rel="modulepreload" href="chunk-5YLBCFDT.js">
+        <link rel="modulepreload" href="chunk-IPTAAT5T.js">
+        <link rel="modulepreload" href="chunk-N6UAH77V.js">
+        <link rel="modulepreload" href="chunk-3Z35ZEOH.js">
+        <link rel="modulepreload" href="chunk-KW67K7GE.js">
+        <link rel="modulepreload" href="chunk-RLY667LZ.js">
+        <script src="polyfills-UVWUS6PV.js" type="module"></script>
+        <script src="main-E6GX2EWK.js" type="module"></script>
+    </body>
+</html>
